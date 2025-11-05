@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeCapsule - Preserve Your Memories</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Page Loader -->
+    <div id="pageLoader" class="page-loader">
+        <div class="loader-capsule">
+            <div class="capsule-top"></div>
+            <div class="capsule-bottom"></div>
+        </div>
+        <div class="loader-text">Loading TimeCapsule...</div>
+    </div>
+
+    <!-- Creating Capsule Loader -->
+    <div id="creatingLoader" class="creating-loader">
+        <div class="closing-capsule">
+            <div class="closing-top"></div>
+            <div class="closing-bottom"></div>
+        </div>
+        <div class="creating-text">Sealing Your Time Capsule...</div>
+    </div>
+
+    <!-- Opening Capsule Loader -->
+    <div id="openingLoader" class="opening-loader">
+        <div class="opening-capsule">
+            <div class="opening-top"></div>
+            <div class="opening-bottom"></div>
+            <div class="opening-light"></div>
+        </div>
+        <div class="opening-text">Opening Time Capsule...</div>
+    </div>
+
+    <div id="saveNotification" class="save-notification">
+        ✓ Capsule saved successfully!
+    </div>
+
+    <div id="errorNotification" class="error-notification"></div>
+
+    <div class="container">
+        <header>
+            <h1>⏳ TimeCapsule</h1>
+            <p class="tagline">Preserve Your Memories, Connect Across Time</p>
+            <div class="main-actions">
+                <button class="btn btn-primary" onclick="showCreateForm()">Create Time Capsule</button>
+                <button class="btn btn-secondary" onclick="showMyCapsules()">My Capsules</button>
+            </div>
+        </header>
+
+        <div class="content-area">
+            <div id="createForm" class="form-section">
+                <h2 style="margin-bottom: 30px;">🎨 Create Your Time Capsule</h2>
+                
+                <div class="form-group">
+                    <label>Choose Capsule Type</label>
+                    <div class="capsule-type-grid">
+                        <div class="type-option selected" data-type="personal" onclick="selectType('personal')">
+                            <div class="type-icon">👤</div>
+                            <div>Personal</div>
+                        </div>
+                        <div class="type-option" data-type="family" onclick="selectType('family')">
+                            <div class="type-icon">👨‍👩‍👧‍👦</div>
+                            <div>Family</div>
+                        </div>
+                        <div class="type-option" data-type="community" onclick="selectType('community')">
+                            <div class="type-icon">🌍</div>
+                            <div>Community</div>
+                        </div>
+                        <div class="type-option" data-type="legacy" onclick="selectType('legacy')">
+                            <div class="type-icon">💝</div>
+                            <div>Legacy</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Custom Capsule Type (Optional)</label>
+                    <input type="text" id="customType" placeholder="e.g., Birthday, Anniversary, Career Goal..." maxlength="50">
+                    <small style="color: #9ca3af; margin-top: 5px;">Leave blank to use the selected type above</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Capsule Title <span style="color: #ef4444;">*</span></label>
+                    <input type="text" id="capsuleTitle" placeholder="Give your time capsule a meaningful name..." maxlength="100" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Your Message <span style="color: #ef4444;">*</span></label>
+                    <textarea id="capsuleMessage" placeholder="Write a message to your future self or loved ones..." maxlength="5000" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Unlock Date <span style="color: #ef4444;">*</span></label>
+                    <input type="date" id="unlockDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Or Choose Duration</label>
+                    <select id="duration" onchange="setDuration()">
+                        <option value="">Select duration...</option>
+                        <option value="0">Today (for testing)</option>
+                        <option value="1">1 Year</option>
+                        <option value="5">5 Years</option>
+                        <option value="10">10 Years</option>
+                        <option value="25">25 Years</option>
+                        <option value="50">50 Years</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Add Predictions (Optional)</label>
+                    <textarea id="predictions" placeholder="What do you think will happen by then? Technology, personal goals, world events..." maxlength="3000"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Password Protection (Optional)</label>
+                    <input type="password" id="capsulePassword" placeholder="Set a password to protect this capsule..." maxlength="50">
+                    <small style="color: #9ca3af; margin-top: 5px;">⚠️ Remember this password! You'll need it to open the capsule.</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Share with Email (Optional)</label>
+                    <input type="email" id="recipientEmail" placeholder="Enter email address to share this capsule..." maxlength="100">
+                    <small style="color: #9ca3af; margin-top: 5px;">📧 A notification will be shown when this capsule unlocks, and you can share it via email.</small>
+                </div>
+
+                <button class="btn btn-primary" onclick="createCapsule()" style="width: 100%; margin-top: 20px;">
+                    🔒 Seal Time Capsule
+                </button>
+            </div>
+
+            <div id="capsulesView" class="form-section">
+                <h2 style="margin-bottom: 30px;">📦 My Time Capsules (<span id="capsuleCount">0</span>)</h2>
+                <div id="capsulesGrid" class="capsules-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="capsuleModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
