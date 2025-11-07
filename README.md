@@ -32,16 +32,7 @@ No build tools are required — this is a static site.
 
 2. Open index.html directly in your browser, or serve it locally for best results:
 
-   - Python 3: 
-     python3 -m http.server 8000
-     then open http://localhost:8000
-
-   - Node (http-server):
-     npm install -g http-server
-     http-server . -p 8000
-     then open http://localhost:8000
-
----
+ 
 
 ## Project Structure
 
@@ -53,7 +44,7 @@ No build tools are required — this is a static site.
 
 ## How it Works (Workflow)
 
-1. Create a capsule: choose a type or enter a custom type, add a title and message, select an unlock date or duration and optionally add a password, predictions or email.
+1. Create a capsule: choo se a type or enter a custom type, add a title and message, select an unlock date or duration and optionally add a password, predictions or email.
 2. Seal the capsule: createCapsule() validates inputs, shows a sealing animation, and persists the capsule to localStorage.
 3. View capsules: the My Capsules view shows saved capsules and the count.
 4. Open capsule: when the unlock date is reached the app allows opening the capsule — if password-protected the correct password must be entered. The opening animation and modal display the stored content.
@@ -114,16 +105,7 @@ Ideas for improvements:
 
 ---
 
-## Screenshots
-
-Add screenshots in an /assets or /docs folder and reference them here. Example placeholders:
-
-![Create Capsule](assets/create-capsule.png)
-
-![Capsules Grid](assets/capsules-grid.png)
-
----
-
+ 
 ## License
 
 This repository is licensed under the MIT License. See the LICENSE file for details.
